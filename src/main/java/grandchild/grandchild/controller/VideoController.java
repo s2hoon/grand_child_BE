@@ -22,4 +22,9 @@ public class VideoController {
         return ResponseEntity.ok(result);
     }
 
+    @GetMapping("/testgitactions")
+    public ResponseEntity<String> test2() {
+        String result = "test complete";
+        return ResponseEntity.ok(result);
+    }
 }
