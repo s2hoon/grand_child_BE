@@ -18,7 +18,7 @@ public class VideoController {
 
     @GetMapping("/test")
     public ResponseEntity<String> test() {
-        String result = "test tt성공";
+        String result = "testd tt성공";
         return ResponseEntity.ok(result);
     }
 
