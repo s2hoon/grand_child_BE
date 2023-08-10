@@ -23,6 +23,10 @@ public class Video {
     private List<Heart> hearts = new ArrayList<>();
     @Column
     private String title;
+
+    @Column
+    private String category;
+
     @Column
     private String image;
     @Column
