@@ -5,22 +5,21 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.web.multipart.MultipartFile;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class VideoUploadRequest {
+
+public class VideoResponse {
+
+    private Long id;
     private String title;
-
     private String category;
-
-    private MultipartFile image;
-
-
+    private String image;
     private String description;
-    private MultipartFile video;
+
+    private String video;
 
     private String content;
 
