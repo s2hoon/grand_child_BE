@@ -17,6 +17,8 @@ public enum BaseResponseStatus {
     FILE_SAVE_ERROR(false, 2001, "파일 저장에 실패하였습니다."),
     FILE_DELETE_ERROR(false, 2002, "파일 삭제에 실패하였습니다."),
 
+    NO_THAT_ID_VIDEO(false, 2004, "id에 해당하는 강의가 없습니다."),
+
     // album
     NO_ACCESS_TO_VIBE(false, 2100, "해당 바이브에 대한 접근 권한이 없습니다."),
 
