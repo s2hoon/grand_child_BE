@@ -32,7 +32,4 @@ public class Member {
 
     @Column
     private Long age;
-
-
-
 }
