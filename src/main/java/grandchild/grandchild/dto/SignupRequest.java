@@ -4,13 +4,13 @@ public class SignupRequest {
     private String id;
     private String username;
     private String password;
-    private int age;
+    private Long age;
 
     public SignupRequest() {
         // 기본 생성자
     }
 
-    public SignupRequest(String id, String username, String password, int age) {
+    public SignupRequest(String id, String username, String password, Long age) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -43,11 +43,11 @@ public class SignupRequest {
         this.password = password;
     }
 
-    public int getAge() {
+    public Long getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(Long age) {
         this.age = age;
     }
 }
