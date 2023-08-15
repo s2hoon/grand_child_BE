@@ -23,24 +23,21 @@ public class MemberService {
         private String key;
         private Long expireTimeMs = 1000 * 60 * 60L; //1시간
 
-        public boolean registerMember(SignupRequest signupRequest) {
-                try {
-                        Member newMember = convertSignupRequestToMember(signupRequest);
-                        memberRepository.save(newMember);
-                        return true;
-                } catch (Exception e) {
-                        return false;
+        public void registerMember(SignupRequest signupRequest) {
+                String username = signupRequest.getUsername();
+                // user name 중복확인
+                if (memberRepository.findByUsername(username).isPresent()) {
+                        throw new BaseException(BaseResponseStatus.EMAIL_ALREADY_EXIST);
                 }
-        }
 
-        private Member convertSignupRequestToMember(SignupRequest signupRequest) {
                 Member member = new Member();
-                member.setUsername(signupRequest.getUsername());
+                member.setUsername(username);
                 member.setAge(signupRequest.getAge());
                 String hashedPassword = bCryptPasswordEncoder.encode(signupRequest.getPassword());
                 member.setPassword(hashedPassword);
-                return member;
+                memberRepository.save(member);
         }
+
 
         public String login(String username, String password) {
 
