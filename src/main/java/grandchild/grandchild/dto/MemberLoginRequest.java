@@ -6,14 +6,10 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class SignupRequest {
+public class MemberLoginRequest {
 
     @JsonProperty
     private String username;
-
     @JsonProperty
     private String password;
-    @JsonProperty
-    private Long age;
-
 }
