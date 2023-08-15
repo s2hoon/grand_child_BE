@@ -39,4 +39,4 @@ out/
 ##application.properties##
 application.properties
 application-dev.properties
-application-prod.propertie
+#application-prod.propertie
