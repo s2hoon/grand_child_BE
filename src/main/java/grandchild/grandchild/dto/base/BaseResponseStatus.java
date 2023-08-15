@@ -57,7 +57,7 @@ public enum BaseResponseStatus {
     // member
 
     EMAIL_ALREADY_EXIST(false, 3200, "이미 가입된 이메일 주소입니다."),
-    WRONG_EMAIL(false, 3201, "잘못된 이메일 주소입니다."),
+    WRONG_USER_NAME(false, 3201, "잘못된 유저 이름 입니다."),
     WRONG_PASSWORD(false, 3202, "잘못된 비밀번호입니다."),
     DISABLED_MEMBER(false, 3203, "탈퇴한 회원입니다."),
     STU_NUM_ALREADY_EXIST(false, 3204, "이미 가입된 학번 입니다."),
