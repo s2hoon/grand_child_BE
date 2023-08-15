@@ -8,8 +8,6 @@ import grandchild.grandchild.dto.base.BaseResponse;
 import grandchild.grandchild.dto.base.BaseResponseStatus;
 import grandchild.grandchild.service.MemberService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -22,16 +20,15 @@ public class MemberController {
     private final MemberService memberService;
 
     @PostMapping("/sign-up")
-    public ResponseEntity<String> registerMember(@RequestBody SignupRequest signupRequest) {
+    public BaseResponse<String> registerMember(@RequestBody SignupRequest signupRequest) {
+        try {
 
-        boolean isSuccess = memberService.registerMember(signupRequest);
+                memberService.registerMember(signupRequest);
+                String result = "회원가입이 완료되었습니다.";
+                return new BaseResponse<String>(BaseResponseStatus.SUCCESS, result);
 
-        if (isSuccess) {
-            String responseMessage = "회원가입이 완료되었습니다.";
-            return ResponseEntity.ok(responseMessage);
-        } else {
-            String responseMessage = "회원가입에 실패하였습니다.";
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseMessage);
+            } catch(BaseException e){
+            return new BaseResponse<>(e.getStatus());
         }
     }
 
