@@ -20,7 +20,7 @@ public class JwtTokenUtil {
 
     public static String createToken(String email , String key, Long expireTimeMs) {
         Claims claims = Jwts.claims();
-        claims.put("email", email);
+        claims.put("username", email);
         return Jwts.builder()
                 .setClaims(claims)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
