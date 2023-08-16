@@ -81,6 +81,7 @@ public class VideoService {
     }
 
 
+
     public void bookmark(String username, Long videoId) {
 
         Member member = memberRepository.findByUsername(username).orElseThrow(() -> new BaseException(BaseResponseStatus.NO_SUCH_MEMBER_EXIST));

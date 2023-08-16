@@ -76,7 +76,7 @@ public class VideoController {
     }
 
 
-    @GetMapping("/bookmark/{videoId}")
+    @PostMapping("/bookmark/{videoId}")
     public BaseResponse<String> video_bookmark(@PathVariable("videoId")  Long videoId) {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
