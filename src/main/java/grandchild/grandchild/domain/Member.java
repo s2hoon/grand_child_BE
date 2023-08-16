@@ -32,4 +32,10 @@ public class Member {
 
     @Column
     private Long age;
+
+    public void addHeart(Heart heart) {
+        if (heart != null) {
+            hearts.add(heart);
+        }
+    }
 }

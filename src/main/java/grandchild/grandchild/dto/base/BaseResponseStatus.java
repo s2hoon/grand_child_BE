@@ -24,12 +24,14 @@ public enum BaseResponseStatus {
 
     NO_SUCH_MEMBER_EXIST(false, 3203, "존재하지 않는 회원입니다."),
 
-    JWT_TOKEN_ERROR(false, 2302, "jwt 토큰을 확인해주세요"),
+    JWT_TOKEN_ERROR(false, 2302, "jwt 토큰을 확인해주세요."),
 
+    /**
+     * 3xxx: Video
+     */
+    FILE_SAVE_ERROR(false, 3001, "파일 저장에 실패하였습니다."),
+    NO_THAT_ID_VIDEO(false, 3002, "id에 해당하는 강의가없습니다.");
 
-    // video
-    FILE_SAVE_ERROR(false, 2001, "파일 저장에 실패하였습니다."),
-    NO_THAT_ID_VIDEO(false, 2002, "id에 해당하는 강의가없습니다.");
 
 
     private final boolean isSuccess;

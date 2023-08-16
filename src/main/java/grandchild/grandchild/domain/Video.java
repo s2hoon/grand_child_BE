@@ -39,5 +39,11 @@ public class Video {
     private String content;
 
 
+    public void addHeart(Heart heart) {
+        if (heart != null) {
+            hearts.add(heart);
+        }
+    }
+
 
 }

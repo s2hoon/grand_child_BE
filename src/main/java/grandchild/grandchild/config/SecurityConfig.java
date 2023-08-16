@@ -25,9 +25,8 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/app/member/**").permitAll()
-                        .requestMatchers("/app/mypage/**","/app/video/bookmark").authenticated()
-                        .anyRequest().authenticated()
+                        .requestMatchers("/app/mypage/**", "/app/video/bookmark").authenticated()
+                        .anyRequest().permitAll()
                 )
                 .sessionManagement(sessionManagement -> sessionManagement
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
