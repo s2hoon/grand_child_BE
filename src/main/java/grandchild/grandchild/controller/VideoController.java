@@ -1,15 +1,17 @@
 package grandchild.grandchild.controller;
 
 
-import com.amazonaws.services.kms.model.NotFoundException;
 import grandchild.grandchild.dto.VideoResponse;
 import grandchild.grandchild.dto.VideoUploadRequest;
+import grandchild.grandchild.dto.base.BaseException;
 import grandchild.grandchild.dto.base.BaseResponse;
 import grandchild.grandchild.dto.base.BaseResponseStatus;
 import grandchild.grandchild.service.VideoService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -19,10 +21,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/app/video")
 @RequiredArgsConstructor
+@Slf4j
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class VideoController {
     private final VideoService videoService;
-
 
     /**
      * 강의 업로드
@@ -54,7 +56,6 @@ public class VideoController {
     public BaseResponse<List<VideoResponse>> video_getAll() {
         List<VideoResponse> videoResponses =videoService.getAll();
         return new BaseResponse<List<VideoResponse>>(BaseResponseStatus.SUCCESS, videoResponses );
-
     }
 
     /**
@@ -62,22 +63,36 @@ public class VideoController {
      * @param videoId
      * @return
      */
-    @GetMapping("/getContent")
-    public BaseResponse<VideoResponse> video_getContent(@RequestParam Long videoId) {
+    @GetMapping("/getContent/{videoId}")
+    public BaseResponse<VideoResponse> video_getContent(@PathVariable("videoId") Long videoId) {
         try {
             VideoResponse videoResponse = videoService.getOne(videoId);
             return new BaseResponse<VideoResponse>(BaseResponseStatus.SUCCESS, videoResponse);
-        } catch (NotFoundException e) {
-            return new BaseResponse<>(BaseResponseStatus.NO_THAT_ID_VIDEO);
+        } catch (BaseException e) {
+            return new BaseResponse<>(e.getStatus());
         }
+
     }
 
 
+    @GetMapping("/bookmark/{videoId}")
+    public BaseResponse<String> video_bookmark(@PathVariable("videoId")  Long videoId) {
 
-    @GetMapping("/bookmark")
-    public ResponseEntity<String> video_bookmark() {
-        String result = "test 성공";
-        return ResponseEntity.ok(result);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null) {
+            log.info("회원 정보 없음");
+            return new BaseResponse<>(BaseResponseStatus.JWT_TOKEN_ERROR);
+        }
+
+        try {
+            String username = authentication.getPrincipal().toString();
+            videoService.bookmark(username, videoId);
+            String result = "강의 즐겨찾기 완료.";
+            return new BaseResponse<String>(BaseResponseStatus.SUCCESS, result);
+
+        } catch (BaseException e) {
+            return new BaseResponse<>(e.getStatus());
+        }
     }
 
 
