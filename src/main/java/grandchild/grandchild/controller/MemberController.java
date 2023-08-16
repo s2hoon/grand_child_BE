@@ -7,7 +7,6 @@ import grandchild.grandchild.dto.base.BaseException;
 import grandchild.grandchild.dto.base.BaseResponse;
 import grandchild.grandchild.dto.base.BaseResponseStatus;
 import grandchild.grandchild.service.MemberService;
-import grandchild.grandchild.service.MypageService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +19,8 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 public class MemberController {
 
+    
+    //에러제거
     private final MemberService memberService;
 
     @PostMapping("/sign-up")
