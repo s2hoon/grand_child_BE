@@ -9,9 +9,8 @@ import grandchild.grandchild.service.MemberService;
 import grandchild.grandchild.service.MypageService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -19,7 +18,6 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/app/mypage")
 @RequiredArgsConstructor
 @Slf4j
-@EnableWebSecurity
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class MypageController {
 
