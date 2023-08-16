@@ -2,6 +2,7 @@ package grandchild.grandchild.controller;
 
 import grandchild.grandchild.domain.Member;
 import grandchild.grandchild.dto.PasswordRequest;
+import grandchild.grandchild.dto.base.BaseException;
 import grandchild.grandchild.dto.base.BaseResponse;
 import grandchild.grandchild.dto.base.BaseResponseStatus;
 import grandchild.grandchild.service.MemberService;
@@ -25,16 +26,20 @@ public class MypageController {
     private final MypageService mypageService;
     private final MemberService memberService;
 
-    @GetMapping("/getinfo")
+    @GetMapping
     public BaseResponse<String> memberInfo() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication == null)
-            return new BaseResponse<>(BaseResponseStatus.INVALID_MEMBER_JWT);
+        try {
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            if (authentication == null)
+                return new BaseResponse<>(BaseResponseStatus.INVALID_MEMBER_JWT);
 
-        String username = authentication.getPrincipal().toString();
-        Member member = mypageService.loadMemberByUsername(username);
+            String username = authentication.getPrincipal().toString();
+            Member member = mypageService.loadMemberByUsername(username);
 
-        return new BaseResponse<>(BaseResponseStatus.SUCCESS, member.getUsername());
+            return new BaseResponse<>(BaseResponseStatus.SUCCESS, member.getUsername());
+        } catch (BaseException e) {
+            return new BaseResponse<>(BaseResponseStatus.JWT_TOKEN_ERROR);
+        }
     }
 
     @PutMapping("/password")
