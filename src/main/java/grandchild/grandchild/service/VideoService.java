@@ -6,6 +6,7 @@ import com.amazonaws.services.s3.model.ObjectMetadata;
 import grandchild.grandchild.domain.Heart;
 import grandchild.grandchild.domain.Member;
 import grandchild.grandchild.domain.Video;
+import grandchild.grandchild.dto.VideoGetAllResponse;
 import grandchild.grandchild.dto.VideoResponse;
 import grandchild.grandchild.dto.base.BaseException;
 import grandchild.grandchild.dto.base.BaseResponseStatus;
@@ -62,7 +63,7 @@ public class VideoService {
 
 
     }
-    public List<VideoResponse> getAll() {
+    public List<VideoGetAllResponse> getAll() {
         // 모든 강의들 끌어옴
         List<Video> videos = videoRepository.findAll();
         // 응답 객체 생성 및 반환
@@ -106,14 +107,13 @@ public class VideoService {
     }
 
 
-    private VideoResponse convertToDTOS(Video video) {
-        VideoResponse videoResponse = new VideoResponse();
-        videoResponse.setId(video.getId());
-        videoResponse.setTitle(video.getTitle());
-        videoResponse.setCategory(video.getCategory());
-        videoResponse.setImage(video.getImage());
-        videoResponse.setDescription(video.getDescription());
-        return videoResponse;
+    private VideoGetAllResponse convertToDTOS(Video video) {
+        VideoGetAllResponse videoGetAllResponse = new VideoGetAllResponse();
+        videoGetAllResponse.setId(video.getId());
+        videoGetAllResponse.setTitle(video.getTitle());
+        videoGetAllResponse.setCategory(video.getCategory());
+        videoGetAllResponse.setImage(video.getImage());
+        return videoGetAllResponse;
     }
     private VideoResponse convertToDTO(Video video) {
         VideoResponse videoResponse = new VideoResponse();
@@ -126,6 +126,8 @@ public class VideoService {
         videoResponse.setContent(video.getContent());
         return videoResponse;
     }
+
+
 
 
 }

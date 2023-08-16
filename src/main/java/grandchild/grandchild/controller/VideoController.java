@@ -1,6 +1,7 @@
 package grandchild.grandchild.controller;
 
 
+import grandchild.grandchild.dto.VideoGetAllResponse;
 import grandchild.grandchild.dto.VideoResponse;
 import grandchild.grandchild.dto.VideoUploadRequest;
 import grandchild.grandchild.dto.base.BaseException;
@@ -53,9 +54,9 @@ public class VideoController {
      * @return
      */
     @GetMapping("/getAll")
-    public BaseResponse<List<VideoResponse>> video_getAll() {
-        List<VideoResponse> videoResponses =videoService.getAll();
-        return new BaseResponse<List<VideoResponse>>(BaseResponseStatus.SUCCESS, videoResponses );
+    public BaseResponse<List<VideoGetAllResponse>> video_getAll() {
+        List<VideoGetAllResponse> videoGetAllResponses =videoService.getAll();
+        return new BaseResponse<List<VideoGetAllResponse>>(BaseResponseStatus.SUCCESS, videoGetAllResponses );
     }
 
     /**
