@@ -7,7 +7,8 @@ import grandchild.grandchild.dto.base.BaseException;
 import grandchild.grandchild.dto.base.BaseResponse;
 import grandchild.grandchild.dto.base.BaseResponseStatus;
 import grandchild.grandchild.service.MemberService;
-import grandchild.grandchild.service.MypageService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -49,6 +50,15 @@ public class MemberController {
             log.info("로그인 실패");
             return new BaseResponse<>(e.getStatus());
         }
+    }
+
+    @PostMapping("/logout")
+    public BaseResponse<String> logout(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        session.invalidate();
+
+        String message = "로그아웃 성공";
+        return new BaseResponse<>(BaseResponseStatus.SUCCESS, message);
     }
 
     // 구현은 했는데 회원가입이랑 어떻게 결합하는지?
