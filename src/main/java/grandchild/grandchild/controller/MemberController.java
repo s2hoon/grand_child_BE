@@ -39,7 +39,7 @@ public class MemberController {
         }
     }
 
-    @GetMapping("/sign-in")
+    @PostMapping("/sign-in")
     public BaseResponse<String> login(@RequestBody MemberLoginRequest dto) {
         try {
             String token = memberService.login(dto.getUsername(), dto.getPassword());
